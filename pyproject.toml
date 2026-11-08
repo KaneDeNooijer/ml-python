@@ -1,7 +1,7 @@
 [project]
 name = "poc-ml"
 version = "0.1.0"
-description = "Add your description here"
+description = "LLMaaltijd proof of concept: estimating missing NOVA groups with machine learning, used by Laravel."
 readme = "README.md"
 authors = [
     { name = "Kane de Nooijer", email = "kanedenooijer@gmail.com" }
@@ -29,4 +29,19 @@ build-backend = "uv_build"
 dev = [
     "httpx>=0.28.1",
     "pytest>=9.1.1",
+    "mypy>=2.4.1",
+    "ruff>=0.17.3",
 ]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*"]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
