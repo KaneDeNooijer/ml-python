@@ -6,7 +6,6 @@ Deze service schat met machine learning de **NOVA-groep** van een product (hoe s
 tot 4) als Open Food Facts die niet kent. De Laravel-app
 [ml-laravel](https://github.com/KaneDeNooijer/ml-laravel) toont die schatting na het scannen van een product.
 
-- **De analyse** achter alle keuzes staat in [`docs/analyse.md`](docs/analyse.md).
 - **Het ML-component:** scikit-learn (k-Nearest Neighbours op TF-IDF-kenmerken), in een FastAPI-service.
 - **Design patterns:** Strategy (uitwisselbare modellen), Adapter (Open Food Facts en Laravel), Pipeline.
 
@@ -55,8 +54,7 @@ Open <http://localhost:8101/docs>. Dit is de interactieve API-documentatie: klap
 | **De vergelijking van de modellen** | `GET /evaluation?category=en:yogurts` | Nauwkeurigheid van alle vier modellen met 5-voudige cross-validatie, beste eerst. Probeer ook `en:breakfast-cereals` of `en:cheeses`. |
 | **Een onbekend product** | `GET /products/00000000` | Status 404 |
 
-De cijfers van `/evaluation` zijn dezelfde metingen als in hoofdstuk 8 van de analyse. Kleine verschillen kunnen
-voorkomen, omdat Open Food Facts dagelijks wordt bijgewerkt.
+Open Food Facts wordt dagelijks bijgewerkt, dus de cijfers kunnen per dag iets verschillen.
 
 ### 5. De automatische tests draaien
 
@@ -92,14 +90,14 @@ docker compose down
 
 ## Waar zit wat?
 
-| Bestand | Inhoud | In de analyse |
-| --- | --- | --- |
-| `src/poc_ml/nova.py` | De kenmerken (tokens) en de vier uitwisselbare modellen: baseline, Naive Bayes, kNN, Logistic Regression | H6, H7.1 Strategy |
-| `src/poc_ml/service.py` | Kiest de trainingsdata per categorie, schat de groep, evalueert de modellen | H6.1, H8.3 |
-| `src/poc_ml/open_food_facts.py` | Haalt producten op bij Open Food Facts | H7.2 Adapter |
-| `src/poc_ml/config.py` | Alle drempels en het gekozen model (`CHOSEN_MODEL`) | H9 |
-| `src/poc_ml/api.py` | De HTTP-routes | H7.3 Microservice |
-| `tests/test_api.py` | De automatische tests | |
+| Bestand | Inhoud |
+| --- | --- |
+| `src/poc_ml/nova.py` | De kenmerken (tokens) en de vier uitwisselbare modellen: baseline, Naive Bayes, kNN, Logistic Regression |
+| `src/poc_ml/service.py` | Kiest de trainingsdata per categorie, schat de groep, evalueert de modellen |
+| `src/poc_ml/open_food_facts.py` | Haalt producten op bij Open Food Facts |
+| `src/poc_ml/config.py` | Alle drempels en het gekozen model (`CHOSEN_MODEL`) |
+| `src/poc_ml/api.py` | De HTTP-routes |
+| `tests/test_api.py` | De automatische tests |
 
 ## Endpoints
 

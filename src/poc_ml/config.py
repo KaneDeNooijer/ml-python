@@ -19,7 +19,7 @@ CATEGORY_LEVELS: Final = 3
 # How many tokens are shown as the reason for an estimate.
 REASON_COUNT: Final = 3
 
-# The model the service uses; chosen with the evaluation in docs/analyse.md.
+# The model the service uses; it scored best in the evaluation (GET /evaluation).
 CHOSEN_MODEL: Final = "k_nearest_neighbours"
 EVALUATION_FOLDS: Final = 5
 RANDOM_STATE: Final = 42
